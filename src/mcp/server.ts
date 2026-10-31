@@ -28,9 +28,9 @@ server.registerTool(
   {
     title: "Set ZCode wallpaper",
     description:
-      "Set the ZCode desktop client's background wallpaper image and adapt the UI colors with Material Design 3 (Monet) dynamic color. ZCode must be running with the CDP debug port (see zcode-beautify launch).",
+      "Set the ZCode desktop client's background wallpaper and adapt the UI colors with Material Design 3 (Monet) dynamic color. Accepts an image (PNG/JPG/GIF/WebP/BMP) or a video (MP4/WebM/MOV — plays muted and looping behind the UI). ZCode must be running with the CDP debug port (see zcode-beautify launch).",
     inputSchema: {
-      image_path: z.string().describe("Absolute path of the image to use as wallpaper"),
+      image_path: z.string().describe("Absolute path of the image or video to use as wallpaper"),
       blur: z.number().min(0).max(100).optional().describe("Wallpaper blur radius in px (default 0)"),
       dim: z.number().min(0).max(100).optional().describe("Wallpaper darkening 0-100 (default 25)"),
     },
@@ -50,18 +50,22 @@ server.registerTool(
   {
     title: "Tune ZCode appearance",
     description:
-      "Adjust the live ZCode appearance without changing the wallpaper: blur radius, dim level, Monet dynamic colors on/off, and wallpaper visibility (translucent vs opaque surfaces). Only the provided values change; the rest keep their current setting.",
+      "Adjust the live ZCode appearance without changing the wallpaper: blur radius, dim level, Monet dynamic colors on/off, wallpaper visibility (translucent vs opaque surfaces), and pseudo-dynamic effects (Ken Burns drift, mouse parallax, falling particles). Only the provided values change; the rest keep their current setting.",
     inputSchema: {
       blur: z.number().min(0).max(100).optional().describe("Wallpaper blur radius in px"),
       dim: z.number().min(0).max(100).optional().describe("Wallpaper darkening 0-100"),
       monet: z.boolean().optional().describe("Regenerate UI colors from the wallpaper (true) or keep ZCode's original colors (false)"),
       wallpaper_visible: z.boolean().optional().describe("Translucent surfaces showing the wallpaper (true) or opaque surfaces (false)"),
       fit: z.enum(["cover", "contain", "smart"]).optional().describe("Framing: cover fills and crops, contain letterboxes with a blurred backdrop, smart analyzes the picture locally and picks the best framing + focus point"),
+      kenburns: z.boolean().optional().describe("Slow Ken Burns drift on the still wallpaper (true/false)"),
+      parallax: z.boolean().optional().describe("Mouse-follow parallax on the wallpaper layers (true/false)"),
+      particles: z.enum(["none", "snow", "petals", "light"]).optional().describe("Canvas particle overlay style"),
+      intensity: z.number().min(0).max(1).optional().describe("Effects intensity 0-1 (particle count, motion amplitude)"),
     },
   },
-  async ({ blur, dim, monet, wallpaper_visible, fit }) => {
+  async ({ blur, dim, monet, wallpaper_visible, fit, kenburns, parallax, particles, intensity }) => {
     try {
-      const windows = await applyColorsOnly({ blur, dim, monet, wallpaperVisible: wallpaper_visible, fit });
+      const windows = await applyColorsOnly({ blur, dim, monet, wallpaperVisible: wallpaper_visible, fit, kenburns, parallax, particles, intensity });
       return { content: [{ type: "text", text: `Appearance updated in ${windows} window(s).` }] };
     } catch (err) {
       return { content: [{ type: "text", text: `Failed: ${(err as Error).message}` }], isError: true };

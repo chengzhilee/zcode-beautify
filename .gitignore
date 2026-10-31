@@ -33,3 +33,11 @@ packages/
 experiments/
 assets/
 .zcode/
+
+# machine-local data and helpers (runtime data lives in the plugin data dir;
+# these remain only as leftovers from before the data-dir migration)
+dist.backup-*/
+wallpapers/
+library-cache/
+zb-restart.ps1
+修复ZCode美化.bat
