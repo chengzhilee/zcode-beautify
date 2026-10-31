@@ -1,5 +1,49 @@
 # Changelog
 
+## v0.4.0
+
+The largest release so far: the wallpaper becomes truly multi-media (video and
+live web pages), the library turns into a browsable catalog, and the whole
+appearance can be snapshotted and restored. The panel is reorganized into four
+tabs to keep everything reachable.
+
+### Added
+
+- **Video wallpapers.** Paste a path to any MP4/WebM/MOV — it plays muted and
+  looping behind the UI, loaded straight from disk (file://) with an automatic
+  fallback to the loopback stream. Optional live color sampling re-tints the UI
+  accents from the playing frames every 5 seconds (WebCodecs-free canvas
+  sampling over the CORS-enabled stream).
+- **Web page wallpapers.** Any https:// URL can be the wallpaper, running in a
+  sandboxed iframe (unique opaque origin, no same-origin access, no top-level
+  navigation) behind the UI.
+- **Wallpaper library.** A thumbnail grid over the Steam Workshop items and the
+  local wallpapers folder: type filters, title search, resolution badges (read
+  from file headers, no full decode), hover previews (enlarged stills, videos
+  play on hover), favorites that sort first and persist, and a 2/4-column grid
+  toggle. Scene-type items get their still background extracted from scene.pkg
+  on first use.
+- **Pseudo-dynamic effects.** Ken Burns drift, mouse parallax and canvas
+  particles (snow / petals / light) layered onto still wallpapers — CSS and
+  canvas only, no re-encoding.
+- **Smart rotation.** A playlist with a configurable interval plus an optional
+  night wallpaper (19:00–7:00) that restores the previous look in the morning.
+- **Appearance presets.** Snapshot the whole look (wallpaper, video, effects,
+  tuning) under a name and switch styles with one click.
+- **Performance guard.** Video decoding pauses while the window is hidden, and
+  low battery (discharging, <20%) automatically falls back to the still image
+  until AC power returns.
+
+### Changed
+
+- **Panel redesign.** Four tabs (Wallpaper / Effects / Rotation / Settings),
+  a current-wallpaper card, drag-and-drop import (active while the panel is
+  open so chat attachments are unaffected), and the plugin is now branded
+  壁纸工坊 (Wallpaper Workshop).
+- **Self-healing daemon.** A dead held session is detected and re-held instead
+  of leaving the daemon alive but blind; hold-session failures are logged, and
+  the poll loop can no longer die from an escaped exception.
+
 ## v0.3.3
 
 The plugin now keeps the debug port alive across ZCode updates by itself, and

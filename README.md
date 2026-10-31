@@ -1,6 +1,17 @@
-# zcode-beautify
+# zcode-beautify · 壁纸工坊 (Wallpaper Workshop)
 
 [English](README.md) | [中文](README.zh-CN.md)
+
+> **Community edition.** This is an enhanced fork of
+> [Logocceai/zcode-beautify](https://github.com/Logocceai/zcode-beautify)
+> (base: v0.3.3) maintained by [@chengzhilee](https://github.com/chengzhilee).
+> On top of the original image wallpaper + Monet theming it adds: **video
+> wallpapers**, **web page wallpapers**, a browsable **wallpaper library**
+> (Steam Workshop + local), pseudo-dynamic effects (Ken Burns / parallax /
+> particles), appearance **presets**, smart **rotation** with a night
+> wallpaper, and a **performance guard**. See [CHANGELOG.md](CHANGELOG.md)
+> (v0.4.0) for the full list. All credit for the original design and code
+> belongs to the upstream author; this fork is MIT-licensed like upstream.
 
 Beautify the **ZCode desktop client**: use any image as a background wallpaper and adapt the whole UI with Material Design 3 (Monet) dynamic color — plus a live settings panel for real-time tuning.
 

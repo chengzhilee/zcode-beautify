@@ -1,6 +1,13 @@
-# zcode-beautify
+# zcode-beautify · 壁纸工坊
 
 [English](README.md) | [中文](README.zh-CN.md)
+
+> **社区增强版**。基于 [Logocceai/zcode-beautify](https://github.com/Logocceai/zcode-beautify)
+> v0.3.3 的增强 fork，由 [@chengzhilee](https://github.com/chengzhilee) 维护。
+> 在原版的图片壁纸 + 莫奈动态配色之上新增：**视频壁纸**、**网页壁纸**、可浏览的**壁纸库**
+> （Steam 创意工坊 + 本地）、伪动态特效（呼吸缩放/视差/飘落粒子）、外观**预设快照**、
+> 智能轮播（含夜间壁纸）与**性能守护**。完整清单见 [CHANGELOG.md](CHANGELOG.md)（v0.4.0）。
+> 原始设计与代码的功劳属于上游作者；本仓库与上游同样采用 MIT 许可证。
 
 美化 **ZCode 桌面客户端**：任意图片一键设为背景壁纸，并用 Material Design 3（莫奈取色）动态配色适配整个 UI——还附带实时悬浮设置面板。
 
